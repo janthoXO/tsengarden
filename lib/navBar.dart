@@ -1,10 +1,18 @@
+import 'dart:ffi';
+
 import 'package:flutter/material.dart';
+import 'package:tsengarden/collection/collectionController.dart';
+import 'package:tsengarden/data.dart';
+import 'package:tsengarden/status/statusController.dart';
+import 'package:tsengarden/wiki/wikiView.dart';
 
 import 'Collection/collectionView.dart';
 import 'Status/statusView.dart';
 
 class NavBar extends StatefulWidget {
-  const NavBar({super.key});
+  NavBar({super.key});
+
+  final Data data = Data.mock();
 
   @override
   State<NavBar> createState() => _NavBarState();
@@ -13,10 +21,19 @@ class NavBar extends StatefulWidget {
 class _NavBarState extends State<NavBar> {
   int _selectedIndex = 0;
 
-  final List<Widget> _tabs = [
-    const StatusView(),
-    const CollectionView(),
-  ];
+  List<Widget> _tabs = [];
+
+  @override
+  void initState() {
+    // TODO: implement initState
+    super.initState();
+    _tabs = [
+      //StatusView(statusController: StatusController(data: widget.data)),
+      StatusView(statusController: StatusController(data: widget.data)),
+      CollectionView(collectionController: CollectionController(data: widget.data)),
+      const WikiView(),
+    ];
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -30,19 +47,23 @@ class _NavBarState extends State<NavBar> {
           ),
           BottomNavigationBarItem(
             icon: Icon(Icons.co2),
-            label: "All Plants",
+            label: "My Plants",
+          ),
+          BottomNavigationBarItem(
+            icon: Icon(Icons.menu_book),
+            label: "Wiki",
           ),
         ],
         currentIndex: _selectedIndex,
         onTap: _onItemTapped,
       ),
-    );();
+    );
+    ();
   }
 
-  void _onItemTapped(int index){
+  void _onItemTapped(int index) {
     setState(() {
       _selectedIndex = index;
     });
   }
 }
-

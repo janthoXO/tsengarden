@@ -14,15 +14,17 @@ class _NeedWaterElementState extends State<NeedWaterElement> {
   @override
   Widget build(BuildContext context) {
     return Container(
-      padding: const EdgeInsets.all(10),
-      decoration: const BoxDecoration(
-        color: Colors.amber,
-        borderRadius: BorderRadius.all(Radius.circular(10)),
+      padding: const EdgeInsets.fromLTRB(10, 10, 0, 10),
+      decoration: BoxDecoration(
+        color: Theme.of(context).colorScheme.secondaryContainer,
+        borderRadius: const BorderRadius.all(Radius.circular(10)),
       ),
       child: Row(children: [
         Text(widget.ownedPlant.name),
         const Spacer(),
-        Text(widget.ownedPlant.lastWatered.toIso8601String()),
+        Text(widget.ownedPlant.lastWatered.toIso8601String(),
+          style: TextStyle(color: Theme.of(context).colorScheme.secondary),
+        ),
         IconButton(onPressed: () {}, icon: const Icon(Icons.water_drop)),
       ]),
     );

@@ -1,6 +1,5 @@
 import 'package:flutter/material.dart';
 import 'package:tsengarden/navBar.dart';
-import 'package:tsengarden/router.dart';
 
 void main() {
   runApp(const MyApp());
@@ -22,10 +21,10 @@ class _MyAppState extends State<MyApp> {
       title: 'Flutter Demo',
       debugShowCheckedModeBanner: false,
       theme: ThemeData(
-        colorScheme: ColorScheme.fromSeed(seedColor: Colors.deepPurple),
+        colorScheme: ColorScheme.fromSeed(seedColor: Colors.lime.shade50),
         useMaterial3: true,
       ),
-      home: const NavBar(),
+      home: NavBar(),
     );
   }
 }

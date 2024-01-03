@@ -34,7 +34,8 @@ class _AddPlantViewState extends State<AddPlantView> {
         appBar: AppBar(
           actions: [IconButton(onPressed: Done, icon: const Icon(Icons.done))],
         ),
-        body: Column(children: [
+        body: SingleChildScrollView(
+            child: Column(children: [
           //image of plant
           Padding(
               padding: const EdgeInsets.symmetric(vertical: 50),
@@ -86,8 +87,42 @@ class _AddPlantViewState extends State<AddPlantView> {
                   labelText: "Room of Plant"),
             ),
           ),
-        ]));
+
+          //plant species
+          // either select from API or adjust manually
+          Padding(
+              padding: const EdgeInsets.all(10),
+              child: Stack(children: [
+                TextField(
+                  onTap: () {}, //pop sheet with search function
+                  decoration: const InputDecoration(
+                      border: OutlineInputBorder(),
+                      contentPadding: EdgeInsets.all(10),
+                      labelText: "Plant Species"),
+                ),
+                Align(
+                    alignment: Alignment.centerRight,
+                    child: IconButton(
+                        onPressed: () {}, // remove search field -> instead display manual options
+                        icon: const Icon(Icons.tune),
+                    )
+                )
+              ]))
+        ])));
   }
+
+  /*Expanded(
+  child: OutlinedButton(
+  onPressed: () {}, //pop sheet with search function
+  style: OutlinedButton.styleFrom(
+  foregroundColor: Theme.of(context).colorScheme.secondary,
+  shape: const RoundedRectangleBorder(
+  borderRadius: BorderRadius.all(Radius.circular(5)))),
+  child: const Text(
+  "Plant Species",
+  textAlign: TextAlign.left,
+  ),
+  ))*/
 
   void Done() {
     Navigator.pop(context);

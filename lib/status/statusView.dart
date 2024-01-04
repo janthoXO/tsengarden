@@ -1,7 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:tsengarden/Collection/AddPlant/AddPlantView.dart';
 import 'package:tsengarden/Status/NeedWaterElement.dart';
-import 'package:tsengarden/models/ownedPlant.dart';
 import 'package:tsengarden/status/statusController.dart';
 
 class StatusView extends StatefulWidget {

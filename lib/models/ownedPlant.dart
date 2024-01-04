@@ -7,8 +7,6 @@ class OwnedPlant{
   DateTime lastWatered;
   Plant plant;
 
-  OwnedPlant(this.name):
-    lastWatered = DateTime.now(),
-    plant = Plant(name: name);
-
+  OwnedPlant({required this.name, required this.plant, this.room, this.comment}):
+    lastWatered = DateTime.now();
 }

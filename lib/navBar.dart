@@ -1,4 +1,3 @@
-import 'dart:ffi';
 
 import 'package:flutter/material.dart';
 import 'package:tsengarden/collection/collectionController.dart';
@@ -58,7 +57,6 @@ class _NavBarState extends State<NavBar> {
         onTap: _onItemTapped,
       ),
     );
-    ();
   }
 
   void _onItemTapped(int index) {

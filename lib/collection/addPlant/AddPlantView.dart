@@ -39,7 +39,7 @@ class _AddPlantViewState extends State<AddPlantView> {
           //image of plant
           Padding(
               padding: const EdgeInsets.symmetric(vertical: 50),
-              child: Container(
+              child: SizedBox(
                   width: 150,
                   height: 150,
                   child: TextButton(

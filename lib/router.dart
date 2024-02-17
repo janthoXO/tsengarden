@@ -1,6 +1,4 @@
 import 'package:go_router/go_router.dart';
-import 'package:tsengarden/Collection/AddPlant/AddPlantView.dart';
-import 'package:tsengarden/collection/addPlant/addPlantController.dart';
 import 'package:tsengarden/main.dart';
 
 final GoRouter _router = GoRouter(

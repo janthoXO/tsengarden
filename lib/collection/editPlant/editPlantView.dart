@@ -1,17 +1,18 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
-import 'package:tsengarden/collection/addPlant/addPlantController.dart';
 
-class AddPlantView extends StatefulWidget {
-  final AddPlantController addPlantController;
+import 'editPlantController.dart';
 
-  const AddPlantView({super.key, required this.addPlantController});
+class EditPlantView extends StatefulWidget {
+  final EditPlantController editPlantController;
+
+  const EditPlantView({super.key, required this.editPlantController});
 
   @override
-  State<AddPlantView> createState() => _AddPlantViewState();
+  State<EditPlantView> createState() => _EditPlantViewState();
 }
 
-class _AddPlantViewState extends State<AddPlantView> {
+class _EditPlantViewState extends State<EditPlantView> {
   late TextEditingController nameInputController;
   late TextEditingController commentInputController;
   late TextEditingController roomInputController;
@@ -20,10 +21,11 @@ class _AddPlantViewState extends State<AddPlantView> {
   @override
   void initState() {
     super.initState();
-    nameInputController = TextEditingController();
-    commentInputController = TextEditingController();
-    roomInputController = TextEditingController();
-    lastWateredInputController = TextEditingController();
+    EditPlantController controller = widget.editPlantController;
+    nameInputController = TextEditingController(text: controller.ownedPlant.name);
+    commentInputController = TextEditingController(text: controller.ownedPlant.comment);
+    roomInputController = TextEditingController(text: controller.ownedPlant.room);
+    lastWateredInputController = TextEditingController(text: controller.ownedPlant.lastWatered.toString().split(" ")[0]);
   }
 
   @override
@@ -60,7 +62,7 @@ class _AddPlantViewState extends State<AddPlantView> {
             child: TextField(
               controller: nameInputController,
               inputFormatters: [FilteringTextInputFormatter.allow(RegExp(r'[a-zA-Z0-9]+.*'))],
-              onChanged: (name){widget.addPlantController.ownedPlant.name = name;},
+              onChanged: (name){widget.editPlantController.ownedPlant.name = name;},
               decoration: const InputDecoration(
                   border: OutlineInputBorder(),
                   contentPadding: EdgeInsets.all(10),
@@ -73,7 +75,7 @@ class _AddPlantViewState extends State<AddPlantView> {
             padding: const EdgeInsets.all(10),
             child: TextField(
               controller: commentInputController,
-              onChanged: (comment){widget.addPlantController.ownedPlant.comment = comment;},
+              onChanged: (comment){widget.editPlantController.ownedPlant.comment = comment;},
               decoration: const InputDecoration(
                   border: OutlineInputBorder(),
                   contentPadding: EdgeInsets.all(10),
@@ -87,7 +89,7 @@ class _AddPlantViewState extends State<AddPlantView> {
             padding: const EdgeInsets.all(10),
             child: TextField(
               controller: roomInputController,
-              onChanged: (room){widget.addPlantController.ownedPlant.room = room;},
+              onChanged: (room){widget.editPlantController.ownedPlant.room = room;},
               decoration: const InputDecoration(
                   border: OutlineInputBorder(),
                   contentPadding: EdgeInsets.all(10),
@@ -113,7 +115,7 @@ class _AddPlantViewState extends State<AddPlantView> {
                         firstDate: DateTime.now().subtract(const Duration(days: 30)),
                         lastDate: DateTime.now().add(const Duration(days: 30))).
                     then((value) {
-                      widget.addPlantController.ownedPlant.lastWatered = value ?? widget.addPlantController.ownedPlant.lastWatered;
+                      widget.editPlantController.ownedPlant.lastWatered = value ?? widget.editPlantController.ownedPlant.lastWatered;
                       lastWateredInputController.text = value != null ? value.toString().split(" ")[0] : lastWateredInputController.text;})
                   },
                 ),
@@ -143,7 +145,7 @@ class _AddPlantViewState extends State<AddPlantView> {
   }
 
   void Done() {
-    if(widget.addPlantController.savePlant()) {
+    if(widget.editPlantController.savePlant()) {
         Navigator.pop(context);
     }
   }

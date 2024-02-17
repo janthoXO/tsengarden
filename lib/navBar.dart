@@ -1,12 +1,13 @@
 
 import 'package:flutter/material.dart';
-import 'package:tsengarden/collection/collectionController.dart';
-import 'package:tsengarden/sharedData.dart';
-import 'package:tsengarden/status/statusController.dart';
 import 'package:tsengarden/wiki/wikiView.dart';
 
-import 'Collection/collectionView.dart';
-import 'Status/statusView.dart';
+import 'collection/collectionController.dart';
+import 'collection/collectionView.dart';
+import 'sharedData.dart';
+import 'status/statusController.dart';
+import 'status/statusView.dart';
+
 
 class NavBar extends StatefulWidget {
   NavBar({super.key});

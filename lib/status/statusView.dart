@@ -1,9 +1,10 @@
 import 'package:flutter/material.dart';
 import 'package:go_router/go_router.dart';
 import 'package:tsengarden/Status/NeedWaterElement.dart';
-import 'package:tsengarden/collection/addPlant/AddPlantView.dart';
-import 'package:tsengarden/collection/addPlant/addPlantController.dart';
 import 'package:tsengarden/status/statusController.dart';
+
+import '../collection/editPlant/editPlantView.dart';
+import '../collection/editPlant/editPlantController.dart';
 
 class StatusView extends StatefulWidget {
   final StatusController statusController;
@@ -23,8 +24,8 @@ class _StatusViewState extends State<StatusView> {
           actions: [
             IconButton(onPressed: () => Navigator.push(
                 context,
-                MaterialPageRoute(builder: (context) => AddPlantView(
-                    addPlantController: AddPlantController(data: widget.statusController.data)
+                MaterialPageRoute(builder: (context) => EditPlantView(
+                    editPlantController: EditPlantController(data: widget.statusController.data)
                 ))),
                 icon: const Icon(Icons.add)),
           ],

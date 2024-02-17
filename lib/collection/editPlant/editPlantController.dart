@@ -2,13 +2,13 @@ import 'package:tsengarden/sharedData.dart';
 import 'package:tsengarden/models/ownedPlant.dart';
 import 'package:tsengarden/models/plant.dart';
 
-class AddPlantController{
+class EditPlantController{
   OwnedPlant ownedPlant;
 
   SharedData data;
 
-  AddPlantController({required this.data}):
-  ownedPlant = OwnedPlant();
+  EditPlantController({required this.data, ownedPlant}):
+    ownedPlant = ownedPlant ?? OwnedPlant();
 
   bool savePlant(){
     if(ownedPlant.name.isEmpty){

@@ -3,6 +3,7 @@ import 'package:go_router/go_router.dart';
 import 'package:tsengarden/Status/NeedWaterElement.dart';
 import 'package:tsengarden/status/statusController.dart';
 
+import '../collection/detailPlantView.dart';
 import '../collection/editPlant/editPlantView.dart';
 import '../collection/editPlant/editPlantController.dart';
 
@@ -59,12 +60,37 @@ class _StatusViewState extends State<StatusView> {
             //WaterList
             Expanded(
               child: ListView.separated(
-                padding: const EdgeInsets.all(5),
+                padding: const EdgeInsets.all(10),
                 itemCount: widget.statusController.data.ownedPlants.length,
                 itemBuilder: (BuildContext ctx, int index) {
-                  return NeedWaterElement(ownedPlant: widget.statusController.data.ownedPlants[index]);
+                  return ElevatedButton(
+                    onPressed: () => Navigator.push(
+                        context,
+                        MaterialPageRoute(
+                            builder: (context) => DetailPlantView(
+                              ownedPlant: widget
+                                  .statusController.data.ownedPlants[index],
+                              data: widget.statusController.data,
+                            ))),
+                    style: ElevatedButton.styleFrom(
+                      minimumSize: const Size(0, 75),
+                      shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(20)),
+                      backgroundColor: Theme.of(context).colorScheme.secondaryContainer,
+                      padding: const EdgeInsets.all(10),
+                    ),
+                    child: Row(children: [
+                      Text(widget.statusController.data.ownedPlants[index].name),
+                      const Spacer(),
+                      Text(
+                        widget.statusController.data.ownedPlants[index].lastWatered.toString().split(" ")[0],
+                        style: TextStyle(color: Theme.of(context).colorScheme.secondary),
+                      ),
+                      const Padding(padding: EdgeInsets.all(5)),
+                      const Icon(Icons.water_drop),
+                    ]),
+                  );
                 },
-                separatorBuilder: (ctx, index) => const Divider(),
+                separatorBuilder: (ctx, index) => const Divider(height: 10,color: Color.fromARGB(0,0,0,0)),
               ),
             ),
           ],

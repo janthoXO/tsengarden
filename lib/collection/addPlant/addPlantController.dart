@@ -3,33 +3,19 @@ import 'package:tsengarden/models/ownedPlant.dart';
 import 'package:tsengarden/models/plant.dart';
 
 class AddPlantController{
-  String? name;
-  String? room;
-  String? comment;
-  DateTime? lastWatered;
+  OwnedPlant ownedPlant;
 
   SharedData data;
 
-  AddPlantController({required this.data});
+  AddPlantController({required this.data}):
+  ownedPlant = OwnedPlant();
 
   bool savePlant(){
-    if(name == null){
+    if(ownedPlant.name.isEmpty){
       return false;
     }
 
-    OwnedPlant ownedPlant = OwnedPlant(name: name!, plant: Plant(commonName: name!));
-
-    data.ownedPlants.add(ownedPlant);
-    return true;
-  }
-
-  bool savePlantPassValues(String? name){
-    if(name == null || name.trim().isEmpty){
-      return false;
-    }
-
-    OwnedPlant ownedPlant = OwnedPlant(name: name!, plant: Plant(commonName: name!));
-
+    ownedPlant.sanitize();
     data.ownedPlants.add(ownedPlant);
     return true;
   }

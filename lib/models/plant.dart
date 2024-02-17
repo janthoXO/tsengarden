@@ -1,5 +1,5 @@
 class Plant {
-  String commonName;
+  String? commonName;
 
   Duration waterInterval;
   String? waterNotes;
@@ -12,7 +12,7 @@ class Plant {
   Uri? link;
 
   Plant({
-    required this.commonName,
+    this.commonName,
     this.waterInterval = const Duration(days: 7),
     this.waterNotes,
     this.light,

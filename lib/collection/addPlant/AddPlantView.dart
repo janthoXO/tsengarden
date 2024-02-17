@@ -60,6 +60,7 @@ class _AddPlantViewState extends State<AddPlantView> {
             child: TextField(
               controller: nameInputController,
               inputFormatters: [FilteringTextInputFormatter.allow(RegExp(r'[a-zA-Z0-9]+.*'))],
+              onChanged: (name){widget.addPlantController.ownedPlant.name = name;},
               decoration: const InputDecoration(
                   border: OutlineInputBorder(),
                   contentPadding: EdgeInsets.all(10),
@@ -72,6 +73,7 @@ class _AddPlantViewState extends State<AddPlantView> {
             padding: const EdgeInsets.all(10),
             child: TextField(
               controller: commentInputController,
+              onChanged: (comment){widget.addPlantController.ownedPlant.comment = comment;},
               decoration: const InputDecoration(
                   border: OutlineInputBorder(),
                   contentPadding: EdgeInsets.all(10),
@@ -85,6 +87,7 @@ class _AddPlantViewState extends State<AddPlantView> {
             padding: const EdgeInsets.all(10),
             child: TextField(
               controller: roomInputController,
+              onChanged: (room){widget.addPlantController.ownedPlant.room = room;},
               decoration: const InputDecoration(
                   border: OutlineInputBorder(),
                   contentPadding: EdgeInsets.all(10),
@@ -109,7 +112,9 @@ class _AddPlantViewState extends State<AddPlantView> {
                         initialDate: DateTime.now(),
                         firstDate: DateTime.now().subtract(const Duration(days: 30)),
                         lastDate: DateTime.now().add(const Duration(days: 30))).
-                    then((value) => lastWateredInputController.text = value != null ? value.toString().split(" ")[0] : lastWateredInputController.text)
+                    then((value) {
+                      widget.addPlantController.ownedPlant.lastWatered = value ?? widget.addPlantController.ownedPlant.lastWatered;
+                      lastWateredInputController.text = value != null ? value.toString().split(" ")[0] : lastWateredInputController.text;})
                   },
                 ),
               ),
@@ -138,10 +143,8 @@ class _AddPlantViewState extends State<AddPlantView> {
   }
 
   void Done() {
-    if(widget.addPlantController.savePlantPassValues(nameInputController.text)) {
-      Navigator.pop(context);
+    if(widget.addPlantController.savePlant()) {
+        Navigator.pop(context);
     }
-
-    
   }
 }

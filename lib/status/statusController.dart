@@ -1,7 +1,7 @@
-import 'package:tsengarden/data.dart';
+import 'package:tsengarden/sharedData.dart';
 
 class StatusController{
-  Data data;
+  SharedData data;
 
   StatusController({required this.data});
 }

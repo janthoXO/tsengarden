@@ -1,7 +1,7 @@
-import 'package:tsengarden/data.dart';
+import 'package:tsengarden/sharedData.dart';
 
 class CollectionController{
-  Data data;
+  SharedData data;
 
   CollectionController({required this.data});
 }

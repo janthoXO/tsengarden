@@ -1,14 +1,14 @@
 import 'package:tsengarden/models/ownedPlant.dart';
 import 'package:tsengarden/models/plant.dart';
 
-class Data {
+class SharedData {
   List<OwnedPlant> ownedPlants;
 
-  Data({required this.ownedPlants});
+  SharedData({required this.ownedPlants});
 
-  Data.empty() : ownedPlants = [];
+  SharedData.empty() : ownedPlants = [];
 
-  Data.mock() : ownedPlants = []{
+  SharedData.mock() : ownedPlants = []{
     for (int i = 0; i < 10; i++) {
       ownedPlants.add(OwnedPlant(name: "plant $i", plant: Plant(commonName: "plant $i")));
     }

@@ -1,7 +1,11 @@
 import 'package:flutter/material.dart';
+import 'package:flutter/services.dart';
+import 'package:tsengarden/collection/addPlant/addPlantController.dart';
 
 class AddPlantView extends StatefulWidget {
-  const AddPlantView({super.key});
+  final AddPlantController addPlantController;
+
+  const AddPlantView({super.key, required this.addPlantController});
 
   @override
   State<AddPlantView> createState() => _AddPlantViewState();
@@ -11,6 +15,7 @@ class _AddPlantViewState extends State<AddPlantView> {
   late TextEditingController nameInputController;
   late TextEditingController commentInputController;
   late TextEditingController roomInputController;
+  late TextEditingController lastWateredInputController;
 
   @override
   void initState() {
@@ -18,6 +23,7 @@ class _AddPlantViewState extends State<AddPlantView> {
     nameInputController = TextEditingController();
     commentInputController = TextEditingController();
     roomInputController = TextEditingController();
+    lastWateredInputController = TextEditingController();
   }
 
   @override
@@ -53,7 +59,7 @@ class _AddPlantViewState extends State<AddPlantView> {
             padding: const EdgeInsets.all(10),
             child: TextField(
               controller: nameInputController,
-              onSubmitted: (s) {},
+              inputFormatters: [FilteringTextInputFormatter.allow(RegExp(r'[a-zA-Z0-9]+.*'))],
               decoration: const InputDecoration(
                   border: OutlineInputBorder(),
                   contentPadding: EdgeInsets.all(10),
@@ -66,7 +72,6 @@ class _AddPlantViewState extends State<AddPlantView> {
             padding: const EdgeInsets.all(10),
             child: TextField(
               controller: commentInputController,
-              onSubmitted: (s) {},
               decoration: const InputDecoration(
                   border: OutlineInputBorder(),
                   contentPadding: EdgeInsets.all(10),
@@ -80,13 +85,34 @@ class _AddPlantViewState extends State<AddPlantView> {
             padding: const EdgeInsets.all(10),
             child: TextField(
               controller: roomInputController,
-              onSubmitted: (s) {},
               decoration: const InputDecoration(
                   border: OutlineInputBorder(),
                   contentPadding: EdgeInsets.all(10),
                   labelText: "Room of Plant"),
             ),
           ),
+
+              // date for last watered
+              Padding(
+                padding: const EdgeInsets.all(10),
+                child: TextField(
+                  controller: lastWateredInputController,
+                  decoration: const InputDecoration(
+                      border: OutlineInputBorder(),
+                      contentPadding: EdgeInsets.all(10),
+                      labelText: "Date Last Watered",
+                    suffixIcon: Icon(Icons.calendar_month)
+                  ),
+                  readOnly: true,
+                  onTap: () => {
+                    showDatePicker(context: context,
+                        initialDate: DateTime.now(),
+                        firstDate: DateTime.now().subtract(const Duration(days: 30)),
+                        lastDate: DateTime.now().add(const Duration(days: 30))).
+                    then((value) => lastWateredInputController.text = value != null ? value.toString().split(" ")[0] : lastWateredInputController.text)
+                  },
+                ),
+              ),
 
           //plant species
           // either select from API or adjust manually
@@ -111,20 +137,11 @@ class _AddPlantViewState extends State<AddPlantView> {
         ])));
   }
 
-  /*Expanded(
-  child: OutlinedButton(
-  onPressed: () {}, //pop sheet with search function
-  style: OutlinedButton.styleFrom(
-  foregroundColor: Theme.of(context).colorScheme.secondary,
-  shape: const RoundedRectangleBorder(
-  borderRadius: BorderRadius.all(Radius.circular(5)))),
-  child: const Text(
-  "Plant Species",
-  textAlign: TextAlign.left,
-  ),
-  ))*/
-
   void Done() {
-    Navigator.pop(context);
+    if(widget.addPlantController.savePlantPassValues(nameInputController.text)) {
+      Navigator.pop(context);
+    }
+
+    
   }
 }

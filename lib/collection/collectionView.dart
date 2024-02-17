@@ -1,5 +1,8 @@
 import 'package:flutter/material.dart';
+import 'package:tsengarden/collection/addPlant/AddPlantView.dart';
+import 'package:tsengarden/collection/addPlant/addPlantController.dart';
 import 'package:tsengarden/collection/collectionController.dart';
+
 
 class CollectionView extends StatefulWidget {
   final CollectionController collectionController;
@@ -17,7 +20,11 @@ class _CollectionViewState extends State<CollectionView> {
       appBar: AppBar(
         title: const Text("My Plants"),
         actions: [
-          IconButton(onPressed: (){}, icon: const Icon(Icons.add)),
+          IconButton(onPressed: () => Navigator.push(
+              context,
+              MaterialPageRoute(builder: (context) => AddPlantView(
+                  addPlantController: AddPlantController(data: widget.collectionController.data)
+              ))), icon: const Icon(Icons.add)),
         ],
       ),
       body: ListView.separated(

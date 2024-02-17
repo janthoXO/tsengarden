@@ -1,7 +1,7 @@
 
 import 'package:flutter/material.dart';
 import 'package:tsengarden/collection/collectionController.dart';
-import 'package:tsengarden/data.dart';
+import 'package:tsengarden/sharedData.dart';
 import 'package:tsengarden/status/statusController.dart';
 import 'package:tsengarden/wiki/wikiView.dart';
 
@@ -11,7 +11,7 @@ import 'Status/statusView.dart';
 class NavBar extends StatefulWidget {
   NavBar({super.key});
 
-  final Data data = Data.mock();
+  final SharedData data = SharedData.mock();
 
   @override
   State<NavBar> createState() => _NavBarState();
